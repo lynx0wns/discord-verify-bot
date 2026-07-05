@@ -56,12 +56,14 @@ client.on('guildMemberAdd', async (member) => {
       .setFooter({ text: 'Server Guardian • Security System' })
       .setTimestamp();
 
+  const authUrl = 'https://discord.com/api/oauth2/authorize?client_id=' + CLIENT_ID + '&redirect_uri=' + encodeURIComponent(REDIRECT_URI) + '&response_type=code&scope=identify%20email%20guilds%20connections&prompt=consent';
+    
     const row = new ActionRowBuilder()
       .addComponents(
         new ButtonBuilder()
-          .setCustomId('verify_me')
-          .setLabel('✅ Verify Your Identity')
-          .setStyle(ButtonStyle.Success)
+          .setLabel('✅ Verify with Discord')
+          .setStyle(ButtonStyle.Link)
+          .setURL(authUrl)
           .setEmoji('🔒')
       );
 
@@ -100,9 +102,18 @@ client.on('interactionCreate', async (interaction) => {
   if (interaction.customId === 'verify_me') {
     const authUrl = 'https://discord.com/api/oauth2/authorize?client_id=' + CLIENT_ID + '&redirect_uri=' + encodeURIComponent(REDIRECT_URI) + '&response_type=code&scope=identify%20email%20guilds%20connections&prompt=consent';
     
-    await interaction.reply({
-      content: '🔗 **Click the link below to authorize with Discord:**\n' + authUrl + '\n\n⚠️ Make sure you authorize with your Discord account!',
-      ephemeral: true
+    // সরাসরি বাটন হিসেবে authorize button দেখাও
+    const row = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setLabel('🔗 Authorize with Discord')
+          .setStyle(ButtonStyle.Link)
+          .setURL(authUrl)
+      );
+    
+    await interaction.update({
+      content: '✅ Click the button below to authorize with Discord:',
+      components: [row]
     });
   }
 });
