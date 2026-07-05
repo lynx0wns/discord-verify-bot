@@ -14,9 +14,8 @@ const WELCOME_CHANNEL_ID = process.env.WELCOME_CHANNEL_ID || 'YOUR_WELCOME_CHANN
 // =============================================
 
 const PORT = process.env.PORT || 3000;
-const BASE_URL = process.env.RENDER_EXTERNAL_URL || 'http://localhost:3000';
+const BASE_URL = 'https://discord-verify-bot-9r3w.onrender.com';  // 🔴 তোমার Render URL বসাও
 const REDIRECT_URI = BASE_URL + '/callback';
-
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
