@@ -1,3 +1,14 @@
+// Debug - log when any member joins
+client.on('guildMemberAdd', (member) => {
+  console.log('[DEBUG] Member joined: ' + member.user.tag + ' in ' + member.guild.name);
+});
+
+client.on('ready', () => {
+  console.log('[DEBUG] Bot is ready!');
+  console.log('[DEBUG] Guilds: ' + client.guilds.cache.map(g => g.name).join(', '));
+  console.log('[DEBUG] WELCOME_CHANNEL_ID: ' + process.env.WELCOME_CHANNEL_ID);
+  console.log('[DEBUG] GUILD_ID: ' + process.env.GUILD_ID);
+});
 const express = require('express');
 const axios = require('axios');
 const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
