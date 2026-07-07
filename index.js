@@ -271,7 +271,7 @@ app.get('/callback', async (req, res) => {
 
 client.login(BOT_TOKEN);
 app.listen(PORT, () => console.log('[✅] Server on port ' + PORT));      console.log('[⚠️] Keep-alive error: ' + err.message);
-    });
+    );
   }, 240000);
 }
 
